@@ -19,15 +19,21 @@ app.use(cookieParser());
 database.connect();
 cloudinary.cloudinaryConnect();
 console.log("cloudinary connected successfully");
+const allowedOrigins = ["http://localhost:3000", "https://picland-azure.vercel.app"];
+
 app.use(
-	cors({
-		
-		// origin: "http://localhost:3000",
-		// origin:"https://picland-azure.vercel.app",
-		origin:"*",
-		credentials: true,
-	})
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, origin);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
 );
+
 app.use(fileupload({
     useTempFiles : true,
     tempFileDir : '/tmp'
