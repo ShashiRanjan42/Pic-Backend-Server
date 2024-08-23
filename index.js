@@ -22,8 +22,8 @@ console.log("cloudinary connected successfully");
 app.use(
 	cors({
 		
-		// origin: "http://localhost:3000",
-		origin:"https://picland-azure.vercel.app/",
+		origin: "http://localhost:3000",
+		// origin:"https://picland-azure.vercel.app/",
 		credentials: true,
 	})
 );
